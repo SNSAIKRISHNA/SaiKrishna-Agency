@@ -25,10 +25,7 @@ export default function App() {
   };
 
   // Items (editable by provider) - initial items mimic the photo
-  const [items, setItems] = useState([
-    { id: 1, name: "5rs SNAK UP 168 pcs", qty: 30, price: 600 },
-    { id: 2, name: "5rs SNAK UP 224 PCS", qty: 20, price: 800 },
-  ]);
+  const [items, setItems] = useState([]);
 
   const invoiceRef = useRef(null);
 
@@ -169,6 +166,8 @@ export default function App() {
     })}`;
   }
 
+  //------------------------------------Render UI-----------------------------------------------------------//
+
   return (
     <div
       style={{
@@ -180,9 +179,7 @@ export default function App() {
       }}
     >
       <div style={{ maxWidth: 900, margin: "0 auto" }}>
-        <h1 style={{ marginBottom: 12 }}>
-          Provider Checkout — Static Agency Invoice
-        </h1>
+        <h1 style={{ marginBottom: 12 }}>Invoice Generator</h1>
 
         <div style={{ display: "flex", gap: 12 }}>
           <div style={{ flex: 1 }}>
@@ -214,6 +211,7 @@ export default function App() {
                       border: "1px solid #ddd",
                       borderRadius: 4,
                     }}
+                    placeholder="items name"
                   />
                   <input
                     type="number"
@@ -226,6 +224,7 @@ export default function App() {
                       border: "1px solid #ddd",
                       borderRadius: 4,
                     }}
+                    placeholder="quantity"
                   />
                   <input
                     type="number"
@@ -238,6 +237,7 @@ export default function App() {
                       border: "1px solid #ddd",
                       borderRadius: 4,
                     }}
+                    placeholder="price per unit"
                   />
                   <button
                     onClick={() => removeItem(it.id)}
