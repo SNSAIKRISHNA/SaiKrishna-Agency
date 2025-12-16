@@ -169,6 +169,11 @@ input {
 
 .signature {
   text-align: right;
-  margin-top: 80px;
+  margin-top: 150px;
   margin-right: 70px;
+}
+
+.invoice-tittle {
+  text-align: center;
+  margin-bottom: 24px;
 }

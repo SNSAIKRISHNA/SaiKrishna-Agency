@@ -54,7 +54,7 @@ const Invoice = forwardRef(
           <strong>Total: {fmt(total())}</strong>
         </div>
 
-        <h4 className="signature">Signature</h4>
+        <h4 className="signature">Authorized Signature</h4>
       </div>
     );
   }
