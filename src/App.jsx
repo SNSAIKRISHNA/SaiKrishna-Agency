@@ -13,7 +13,7 @@ export default function App() {
 
   const agency = {
     name: "Saikrishna Agency",
-    address: "80/5 Arcot Road, Sathuvachari",
+    address: "80/5 Arcot Road. 1st floor,Sathuvachari. Vellore - 632009",
     gst: "33CRIPM7982G1ZC",
   };
 
@@ -25,7 +25,12 @@ export default function App() {
   });
 
   const [items, setItems] = useState([
-    { id: 1, name: "5rs SNAK UP 168 pcs", qty: 30, price: 600 },
+    { id: 1, name: "Locas Tea (12 + 1)", qty: 0, price: 1200 },
+    { id: 2, name: "Nuts", qty: 0, price: 600 },
+    { id: 3, name: "Detergent", qty: 0, price: 600 },
+    { id: 4, name: "Chips", qty: 0, price: 600 },
+    { id: 5, name: "Pens", qty: 0, price: 600 },
+    { id: 6, name: "Juice", qty: 0, price: 600 },
   ]);
 
   const subtotal = () => items.reduce((s, i) => s + i.qty * i.price, 0);
@@ -50,9 +55,16 @@ export default function App() {
       <InvoiceDetails details={details} setDetails={setDetails} />
       <ItemsEditor
         items={items}
-        updateItem={(id,f,v)=>setItems(p=>p.map(i=>i.id===id?{...i,[f]:v}:i))}
-        addItem={()=>setItems(p=>[...p,{id:Date.now(),name:"",qty:1,price:0}])}
-        removeItem={(id)=>setItems(p=>p.filter(i=>i.id!==id))}
+        updateItem={(id, f, v) =>
+          setItems((p) => p.map((i) => (i.id === id ? { ...i, [f]: v } : i)))
+        }
+        addItem={() =>
+          setItems((p) => [
+            ...p,
+            { id: Date.now(), name: "", qty: 1, price: 0 },
+          ])
+        }
+        removeItem={(id) => setItems((p) => p.filter((i) => i.id !== id))}
         downloadPDF={downloadPDF}
       />
       <h3 className="preview-title">Invoice Preview</h3>

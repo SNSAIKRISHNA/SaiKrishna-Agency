@@ -10,19 +10,27 @@ const Invoice = forwardRef(
             <p>{agency.address}</p>
             <p>GSTIN: {agency.gst}</p>
           </div>
-          <div>
-            <p><strong>Invoice:</strong> {details.invoiceNo}</p>
-            <p>Date: {details.date}</p>
+          <div className="invoice-right">
+            <p>
+              <strong>Bill To:</strong> {details.to}
+            </p>
             <p>Place: {details.place}</p>
+
+            <p>Date: {details.date}</p>
+            <p>
+              <strong>Invoice:</strong> {details.invoiceNo}
+            </p>
           </div>
         </div>
-
-        <p><strong>Bill To:</strong> {details.to}</p>
 
         <table className="invoice-table">
           <thead>
             <tr>
-              <th>#</th><th>Item</th><th>Qty</th><th>Price</th><th>Amount</th>
+              <th>#</th>
+              <th>Item</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>Amount</th>
             </tr>
           </thead>
           <tbody>
@@ -44,6 +52,8 @@ const Invoice = forwardRef(
           <div>CGST 2.5%: {fmt(tax(0.025))}</div>
           <strong>Total: {fmt(total())}</strong>
         </div>
+
+        <h4 className="signature">Signature</h4>
       </div>
     );
   }

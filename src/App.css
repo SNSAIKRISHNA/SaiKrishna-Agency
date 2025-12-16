@@ -2,7 +2,9 @@
   box-sizing: border-box;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   width: 100%;
   margin: 0;
@@ -29,7 +31,9 @@ body {
   border-radius: 8px;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   margin-top: 0;
 }
 
@@ -40,22 +44,30 @@ button {
   cursor: pointer;
 }
 
-.primary { background: #2563eb; color: #fff; }
-.success { background: #059669; color: #fff; }
-.danger  { background: #dc2626; color: #fff; }
+.primary {
+  background: #2563eb;
+  color: #fff;
+}
+.success {
+  background: #059669;
+  color: #fff;
+}
+.danger {
+  background: #dc2626;
+  color: #fff;
+}
 
 .header {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
   color: #fff;
-  background:linear-gradient(90deg, #1723ff, #0aff9d61 );
+  background: linear-gradient(90deg, #1723ff, #0aff9d61);
   padding: 30px 10px 10px 10px;
   height: 100px;
   font-size: medium;
   margin-bottom: 50px;
   border-radius: 8px;
-
 }
 .header h1 span {
   background-color: #000;
@@ -66,8 +78,11 @@ button {
 input {
   width: 100%;
   padding: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #030303;
   border-radius: 4px;
+  background-color: #ffffff;
+  color: black;
+  margin-bottom: 3px;
 }
 
 .preview-title {
@@ -86,7 +101,7 @@ input {
   width: 794px;
   max-width: 100%;
   margin: 0 auto;
-  background: #fff;
+  background: #fffefe;
   padding: 24px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -140,4 +155,20 @@ input {
 
 .invoice-footer {
   margin-top: 40px;
+}
+
+.item-row {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 3px;
+}
+
+.bill-to {
+  margin-top: 8px;
+}
+
+.signature {
+  text-align: right;
+  margin-top: 80px;
+  margin-right: 70px;
 }
