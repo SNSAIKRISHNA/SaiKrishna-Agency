@@ -4,6 +4,7 @@ const Invoice = forwardRef(
   ({ agency, details, items, subtotal, tax, total, fmt }, ref) => {
     return (
       <div ref={ref} className="invoice">
+        <div className="invoice-tittle"><h3>Tax Invoice</h3></div>
         <div className="invoice-header">
           <div>
             <h2>{agency.name}</h2>
