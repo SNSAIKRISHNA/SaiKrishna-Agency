@@ -3,10 +3,10 @@ import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import "./App.css";
 
-import Header from "./components/Header.jsx";
-import InvoiceDetails from "./components/InvoiceDetails.jsx";
-import ItemsEditor from "./components/ItemsEditor.jsx";
-import Invoice from "./components/Invoice.jsx";
+import Header from "./Components/Header.jsx";
+import InvoiceDetails from "./Components/InvoiceDetails.jsx";
+import ItemsEditor from "./Components/ItemsEditor.jsx";
+import Invoice from "./Components/Invoice.jsx";
 
 export default function App() {
   const invoiceRef = useRef(null);
