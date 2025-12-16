@@ -4,25 +4,35 @@ const Invoice = forwardRef(
   ({ agency, details, items, subtotal, tax, total, fmt }, ref) => {
     return (
       <div ref={ref} className="invoice">
+        <div className="invoice-tittle"><h3>Tax Invoice</h3></div>
         <div className="invoice-header">
           <div>
             <h2>{agency.name}</h2>
             <p>{agency.address}</p>
             <p>GSTIN: {agency.gst}</p>
           </div>
-          <div>
-            <p><strong>Invoice:</strong> {details.invoiceNo}</p>
+
+          <div className="bill-To">
+            <p>
+              <strong>Bill To:</strong> {details.to}
+            </p>
+
             <p>Date: {details.date}</p>
             <p>Place: {details.place}</p>
+            <p>
+              <strong>Invoice:</strong> {details.invoiceNo}
+            </p>
           </div>
         </div>
-
-        <p><strong>Bill To:</strong> {details.to}</p>
 
         <table className="invoice-table">
           <thead>
             <tr>
-              <th>#</th><th>Item</th><th>Qty</th><th>Price</th><th>Amount</th>
+              <th>#</th>
+              <th>Item</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>Amount</th>
             </tr>
           </thead>
           <tbody>
@@ -43,6 +53,9 @@ const Invoice = forwardRef(
           <div>SGST 2.5%: {fmt(tax(0.025))}</div>
           <div>CGST 2.5%: {fmt(tax(0.025))}</div>
           <strong>Total: {fmt(total())}</strong>
+        </div>
+        <div className="invoice-signature">
+          <h3> Authorized Signature</h3>
         </div>
       </div>
     );

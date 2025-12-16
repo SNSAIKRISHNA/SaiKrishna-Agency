@@ -141,3 +141,18 @@ input {
 .invoice-footer {
   margin-top: 40px;
 }
+
+.bill-to{
+  margin-top: 8px; 
+}
+
+.invoice-signature {
+  text-align: right;
+  margin-right: 100px;
+  margin-top: 100px;
+}
+
+.invoice-tittle {
+  text-align: center;
+  margin-bottom: 20px;
+}
