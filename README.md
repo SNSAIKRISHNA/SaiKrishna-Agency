@@ -53,9 +53,9 @@ package.json
 
 ---
 
-PDF Generation Logic
+## PDF Generation Logic
 
-The invoice PDF is generated using html2canvas and jsPDF, capturing only the invoice section:
+```The invoice PDF is generated using html2canvas and jsPDF, capturing only the invoice section:
 
 const canvas = await html2canvas(invoiceRef.current, { scale: 2 });
 const pdf = new jsPDF("p", "pt", "a4");
@@ -66,6 +66,7 @@ pdf.addImage(canvas, "PNG", 0, 0, w, h);
 pdf.save(`${details.invoiceNo}.pdf`);
 
 
+----
 
 ## 🚀 Installation & Setup
 
@@ -80,6 +81,7 @@ npm install
 Start the development server
 npm run dev
 
+----
 👨‍💻 Developer
 
 Name: Saikrishna S.N
