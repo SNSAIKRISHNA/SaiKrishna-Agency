@@ -1,45 +1,64 @@
-# SaiKrishna-Agency 
+````markdown
+# 🧾 SaiKrishna-Agency
 
-A modern **GST Invoice Generator Web Application** built using **React**.  
-This project allows users to create GST-compliant tax invoices with accurate calculations, auto-generated invoice numbers, and **direct PDF download** functionality.
+A **GST Invoice Generator Web Application** built with **React** that allows users to create tax-compliant invoices and download them as high-quality PDFs.
 
----
-
-## 📌 Features
-
-✔ GST-compliant invoice generation  
-✔ Add multiple items with quantity, price & GST percentage  
-✔ Auto-generated **Invoice Numbers** (persistent across sessions)  
-✔ High-quality **PDF download** using html2canvas & jsPDF  
-✔ Clean and professional invoice layout  
-✔ Easy-to-use UI for real-world billing  
-✔ Accurate subtotal, GST, and grand total calculation  
+This project focuses on **real-world billing logic**, including accurate GST calculation, auto-generated invoice numbers, and clean invoice formatting.
 
 ---
 
-## 🧰 Tech Stack
+## ✨ Key Features
 
-| Technology | Usage |
-|----------|------|
-| React | Frontend UI & state management |
-| JavaScript | Core logic |
-| html2canvas | Capture invoice DOM |
-| jsPDF | Generate downloadable PDF |
-| CSS,Tailwind| Styling & layout |
+- ✅ GST-compliant invoice generation  
+- ✅ Multiple item support (Qty, Price, GST %)  
+- ✅ Automatic **Invoice Number Generation**  
+- ✅ Persistent invoice numbers using `localStorage`  
+- ✅ High-resolution **PDF export** (html2canvas + jsPDF)  
+- ✅ Clean & professional invoice layout  
+- ✅ Accurate subtotal, GST & grand total calculation  
+
+---
+
+## 🛠 Tech Stack
+
+| Technology | Purpose |
+|----------|---------|
+| **React** | Frontend UI & state management |
+| **JavaScript** | Core logic |
+| **html2canvas** | Capture invoice DOM |
+| **jsPDF** | Generate downloadable PDF |
+| **CSS** | Styling & layout |
 
 ---
 
-## ⚙️ How the Application Works
+## ⚙️ How It Works
 
-1. Enter invoice details such as **Bill To**, **Place of Supply**, and **Date**
-2. Add one or more invoice items
-3. Each item includes quantity, price, and GST percentage
-4. Click **Download PDF**
-5. An invoice number is auto-generated and a **PDF invoice is downloaded**
-6. Invoice numbers increment automatically 
+1. Enter **Bill To**, **Place of Supply**, and **Date**
+2. Add invoice items with quantity, price, and GST %
+3. Click **Download PDF**
+4. Invoice number is auto-generated
+5. A **PDF invoice** is downloaded instantly
+6. Invoice numbers increment automatically for each download
 
 ---
-📁 Project Structure
+
+## 📄 PDF Generation Logic
+
+```js
+const canvas = await html2canvas(invoiceRef.current, { scale: 2 });
+const pdf = new jsPDF("p", "pt", "a4");
+const width = pdf.internal.pageSize.getWidth();
+const height = (canvas.height * width) / canvas.width;
+
+pdf.addImage(canvas, "PNG", 0, 0, width, height);
+pdf.save(`${details.invoiceNo}.pdf`);
+````
+
+---
+
+## 📁 Project Structure
+
+```
 src/
  ├─ App.jsx
  ├─ App.css
@@ -50,51 +69,61 @@ src/
  │   └─ ItemsEditor.jsx
  ├─ main.jsx
 package.json
+```
 
 ---
-
-## PDF Generation Logic
-
-```The invoice PDF is generated using html2canvas and jsPDF, capturing only the invoice section:
-
-const canvas = await html2canvas(invoiceRef.current, { scale: 2 });
-const pdf = new jsPDF("p", "pt", "a4");
-const w = pdf.internal.pageSize.getWidth();
-const h = (canvas.height * w) / canvas.width;
-
-pdf.addImage(canvas, "PNG", 0, 0, w, h);
-pdf.save(`${details.invoiceNo}.pdf`);
-
-
-----
 
 ## 🚀 Installation & Setup
 
-### Clone the repository
 ```bash
 git clone https://github.com/SNSAIKRISHNA/SaiKrishna-Agency.git
 cd SaiKrishna-Agency
-
-Install dependencies
 npm install
-
-Start the development server
 npm run dev
+```
 
-----
-👨‍💻 Developer
+Open in browser:
 
-Name: Saikrishna S.N
-📧 Email: saikrishnasn@outlook.com
+```
+http://localhost:5173
+```
 
-🤝 Contributor
-
-Name: Yaswanth Kumar V
-📧 Email: kumaryaswanth769@mail.com
-
-📜 License
-
-This project is open-source and free to use for learning and development purposes.
 ---
 
+## 👨‍💻 Developer
 
+**Saikrishna S.N**
+📧 Email: **[saikrishnasn@outlook.com](mailto:saikrishnasn@outlook.com)**
+
+---
+
+## 🤝 Contributor
+
+**Yaswanth Kumar V**
+📧 Email: **[kumaryaswanth769@mail.com](mailto:kumaryaswanth769@mail.com)**
+
+---
+
+## 🔮 Future Enhancements
+
+* Invoice history tracking
+* Multi-page PDF support
+* Monthly invoice number reset
+* Company logo & watermark
+* Backend integration
+* Email invoice feature
+
+---
+
+## 📜 License
+
+This project is open-source and intended for **learning and development purposes**.
+
+---
+
+⭐ If you find this project useful, consider starring the repository!
+
+```
+
+---
+```
