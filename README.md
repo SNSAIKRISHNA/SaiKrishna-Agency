@@ -1,16 +1,98 @@
-# React + Vite
+# SaiKrishna-Agency 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern **GST Invoice Generator Web Application** built using **React**.  
+This project allows users to create GST-compliant tax invoices with accurate calculations, auto-generated invoice numbers, and **direct PDF download** functionality.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📌 Features
 
-## React Compiler
+✔ GST-compliant invoice generation  
+✔ Add multiple items with quantity, price & GST percentage  
+✔ Auto-generated **Invoice Numbers** (persistent across sessions)  
+✔ High-quality **PDF download** using html2canvas & jsPDF  
+✔ Clean and professional invoice layout  
+✔ Easy-to-use UI for real-world billing  
+✔ Accurate subtotal, GST, and grand total calculation  
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🧰 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Technology | Usage |
+|----------|------|
+| React | Frontend UI & state management |
+| JavaScript | Core logic |
+| html2canvas | Capture invoice DOM |
+| jsPDF | Generate downloadable PDF |
+| CSS,Tailwind| Styling & layout |
+
+---
+
+## ⚙️ How the Application Works
+
+1. Enter invoice details such as **Bill To**, **Place of Supply**, and **Date**
+2. Add one or more invoice items
+3. Each item includes quantity, price, and GST percentage
+4. Click **Download PDF**
+5. An invoice number is auto-generated and a **PDF invoice is downloaded**
+6. Invoice numbers increment automatically 
+
+---
+📁 Project Structure
+src/
+ ├─ App.jsx
+ ├─ App.css
+ ├─ Components/
+ │   ├─ Header.jsx
+ │   ├─ Invoice.jsx
+ │   ├─ InvoiceDetails.jsx
+ │   └─ ItemsEditor.jsx
+ ├─ main.jsx
+package.json
+
+---
+
+PDF Generation Logic
+
+The invoice PDF is generated using html2canvas and jsPDF, capturing only the invoice section:
+
+const canvas = await html2canvas(invoiceRef.current, { scale: 2 });
+const pdf = new jsPDF("p", "pt", "a4");
+const w = pdf.internal.pageSize.getWidth();
+const h = (canvas.height * w) / canvas.width;
+
+pdf.addImage(canvas, "PNG", 0, 0, w, h);
+pdf.save(`${details.invoiceNo}.pdf`);
+
+
+
+## 🚀 Installation & Setup
+
+### Clone the repository
+```bash
+git clone https://github.com/SNSAIKRISHNA/SaiKrishna-Agency.git
+cd SaiKrishna-Agency
+
+Install dependencies
+npm install
+
+Start the development server
+npm run dev
+
+👨‍💻 Developer
+
+Name: Saikrishna S.N
+📧 Email: saikrishnasn@outlook.com
+
+🤝 Contributor
+
+Name: Yaswanth Kumar V
+📧 Email: kumaryaswanth769@mail.com
+
+📜 License
+
+This project is open-source and free to use for learning and development purposes.
+---
+
+
