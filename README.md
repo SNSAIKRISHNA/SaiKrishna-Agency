@@ -104,26 +104,9 @@ http://localhost:5173
 
 ---
 
-## 🔮 Future Enhancements
-
-* Invoice history tracking
-* Multi-page PDF support
-* Monthly invoice number reset
-* Company logo & watermark
-* Backend integration
-* Email invoice feature
-
----
-
 ## 📜 License
 
 This project is open-source and intended for **learning and development purposes**.
-
----
-
-⭐ If you find this project useful, consider starring the repository!
-
-```
 
 ---
 ```
