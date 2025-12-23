@@ -25,11 +25,8 @@ export default function InvoiceDetails({ details, setDetails }) {
         onChange={(e) => update("date", e.target.value)}
       />
 
-      <input
-        placeholder="Invoice Number"
-        value={details.invoiceNo}
-        onChange={(e) => update("invoiceNo", e.target.value)}
-      />
+      <p><strong>Invoice No:</strong> {details.invoiceNo}</p>
+
     </div>
   );
 }
