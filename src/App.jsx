@@ -97,30 +97,35 @@ export default function App() {
   }
 
   return (
-    <>
-      <Header />
-      <div className="app">
-        <InvoiceDetails details={details} setDetails={setDetails} />
+   
+   <div className="w-full px-3">
+    <Header  />
+    
+    
 
-        <ItemsEditor
-          items={items}
-          updateItem={updateItem}
-          addItem={addItem}
-          removeItem={removeItem}
-          downloadPDF={downloadPDF}
-        />
+    <div className="w-full mx-auto px-6  bg-white text-black">
+      <InvoiceDetails details={details} setDetails={setDetails} />
 
-        <Invoice
-          ref={invoiceRef}
-          agency={agency}
-          details={details}
-          items={items}
-          subtotal={subtotal}
-          totalGST={totalGST}
-          total={total}
-          fmt={fmt}
-        />
-      </div>
-    </>
-  );
+      <ItemsEditor
+        items={items}
+        updateItem={updateItem}
+        addItem={addItem}
+        removeItem={removeItem}
+        downloadPDF={downloadPDF}
+      />
+
+      <Invoice
+        ref={invoiceRef}
+        agency={agency}
+        details={details}
+        items={items}
+        subtotal={subtotal}
+        totalGST={totalGST}
+        total={total}
+        fmt={fmt}
+      />
+    </div>
+   
+  </div>
+);
 }
