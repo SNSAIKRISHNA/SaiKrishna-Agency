@@ -1,83 +1,131 @@
-import { useState, useRef } from "react";
-import html2canvas from "html2canvas";
-import { jsPDF } from "jspdf";
 import "./App.css";
+import { useRef, useState } from "react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
-import Header from "./Components/Header.jsx";
-import InvoiceDetails from "./Components/InvoiceDetails.jsx";
-import ItemsEditor from "./Components/ItemsEditor.jsx";
-import Invoice from "./Components/Invoice.jsx";
+import Invoice from "./Components/Invoice";
+import InvoiceDetails from "./Components/InvoiceDetails";
+import ItemsEditor from "./Components/ItemsEditor";
+import Header from "./Components/Header";
 
 export default function App() {
   const invoiceRef = useRef(null);
 
-  const agency = {
+  const [agency] = useState({
     name: "Saikrishna Agency",
-    address: "80/5 Arcot Road. 1st floor,Sathuvachari. Vellore - 632009",
-    gst: "33CRIPM7982G1ZC",
-  };
+    address: "Tamil Nadu, India",
+    phone: "8489014499",
+    gst: "33ABCDE1234F1Z5",
+  });
 
   const [details, setDetails] = useState({
     to: "",
     place: "",
-    date: new Date().toISOString().slice(0, 10),
-    invoiceNo: "INV-001",
+    date: "",
+    invoiceNo: "",
   });
 
   const [items, setItems] = useState([
-    { id: 1, name: "Locas Tea (12 + 1)", qty: 0, price: 1200 },
-    { id: 2, name: "Nuts", qty: 0, price: 600 },
-    { id: 3, name: "Detergent", qty: 0, price: 600 },
-    { id: 4, name: "Chips", qty: 0, price: 600 },
-    { id: 5, name: "Pens", qty: 0, price: 600 },
-    { id: 6, name: "Juice", qty: 0, price: 600 },
+    { id: 1, name: "", qty: 1, price: 1, gst: 5 },
   ]);
 
-  const subtotal = () => items.reduce((s, i) => s + i.qty * i.price, 0);
-  const tax = (r) => subtotal() * r;
-  const total = () => subtotal() + tax(0.05);
+  function updateItem(id, field, value) {
+    setItems((prev) =>
+      prev.map((it) => (it.id === id ? { ...it, [field]: value } : it))
+    );
+  }
 
-  const fmt = (n) =>
-    `₹${n.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`;
+  function addItem() {
+    setItems((prev) => [
+      ...prev,
+      { id: Date.now(), name: "", qty: 1, price: 0, gst: 5 },
+    ]);
+  }
 
+  function removeItem(id) {
+    setItems((prev) => prev.filter((it) => it.id !== id));
+  }
+
+  function subtotal() {
+    return items.reduce((sum, it) => sum + it.qty * it.price, 0);
+  }
+
+  function totalGST() {
+    return items.reduce((sum, it) => {
+      const base = it.qty * it.price;
+      return sum + (base * it.gst) / 100;
+    }, 0);
+  }
+
+  function total() {
+    return subtotal() + totalGST();
+  }
+
+  function fmt(val) {
+    return `₹${val.toFixed(2)}`;
+  }
+
+  function generateInvoiceNumber() {
+    const last = localStorage.getItem("lastInvoiceNo") || "INV-0000";
+    const next = Number(last.split("-")[1]) + 1;
+    const invoiceNo = `INV-${String(next).padStart(4, "0")}`;
+    localStorage.setItem("lastInvoiceNo", invoiceNo);
+    return invoiceNo;
+  }
+
+  
   async function downloadPDF() {
-    const canvas = await html2canvas(invoiceRef.current, { scale: 2 });
-    const pdf = new jsPDF("p", "pt", "a4");
-    const w = pdf.internal.pageSize.getWidth();
-    const h = (canvas.height * w) / canvas.width;
-    pdf.addImage(canvas, "PNG", 0, 0, w, h);
-    pdf.save("invoice.pdf");
+    const newInvoiceNo = generateInvoiceNumber();
+
+    setDetails((prev) => ({
+      ...prev,
+      invoiceNo: newInvoiceNo,
+    }));
+
+    
+    setTimeout(async () => {
+      const canvas = await html2canvas(invoiceRef.current, { scale: 2 });
+      const imgData = canvas.toDataURL("image/png");
+
+      const pdf = new jsPDF("p", "pt", "a4");
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      pdf.save(`${newInvoiceNo}.pdf`);
+    }, 300);
   }
 
   return (
-    <div className="app">
-      <Header />
+   
+   <div className="w-full px-3">
+    <Header  />
+    
+    
+
+    <div className="w-full mx-auto px-6  bg-white text-black">
       <InvoiceDetails details={details} setDetails={setDetails} />
+
       <ItemsEditor
         items={items}
-        updateItem={(id, f, v) =>
-          setItems((p) => p.map((i) => (i.id === id ? { ...i, [f]: v } : i)))
-        }
-        addItem={() =>
-          setItems((p) => [
-            ...p,
-            { id: Date.now(), name: "", qty: 1, price: 0 },
-          ])
-        }
-        removeItem={(id) => setItems((p) => p.filter((i) => i.id !== id))}
+        updateItem={updateItem}
+        addItem={addItem}
+        removeItem={removeItem}
         downloadPDF={downloadPDF}
       />
-      <h3 className="preview-title">Invoice Preview</h3>
+
       <Invoice
         ref={invoiceRef}
         agency={agency}
         details={details}
         items={items}
         subtotal={subtotal}
-        tax={tax}
+        totalGST={totalGST}
         total={total}
         fmt={fmt}
       />
     </div>
-  );
+   
+  </div>
+);
 }
