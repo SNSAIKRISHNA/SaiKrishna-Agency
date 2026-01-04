@@ -67,6 +67,7 @@ export default function ItemsEditor({
                 type="number"
                 
                 value={it.price}
+                min={1}
                 onChange={(e) =>
                   updateItem(it.id, "price", Number(e.target.value))
                 }
