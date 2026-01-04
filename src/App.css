@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
-
- @theme {
+@theme {
   --breakpoint-sm: 40rem;
   --breakpoint-md: 48rem;
   --breakpoint-lg: 64rem;
@@ -9,15 +8,40 @@
 }
 
 @layer base {
-
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
 
-
   input[type="number"] {
     -moz-appearance: textfield;
+  }
+}
+
+/* ================= PRINT FIX FOR MOBILE PDF ================= */
+@media print {
+  body {
+    background: white;
+  }
+
+  /* Force A4 width even on mobile browsers */
+  .invoice-print {
+    width: 794px !important;
+    min-width: 794px !important;
+  }
+
+  /* Always show table in PDF */
+  .invoice-table {
+    display: block !important;
+  }
+
+  /* Never show mobile cards in PDF */
+  .invoice-mobile {
+    display: none !important;
+  }
+
+  table {
+    page-break-inside: avoid;
   }
 }
