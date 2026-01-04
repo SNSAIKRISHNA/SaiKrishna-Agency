@@ -19,29 +19,33 @@
   }
 }
 
-/* ================= PRINT FIX FOR MOBILE PDF ================= */
+/* ===== MOBILE PRINT FIX ===== */
 @media print {
-  body {
+  @page {
+    size: A4;
+    margin: 20mm;
+  }
+
+  html, body {
+    width: 794px;
+    min-width: 794px;
     background: white;
   }
 
-  /* Force A4 width even on mobile browsers */
   .invoice-print {
     width: 794px !important;
-    min-width: 794px !important;
   }
 
-  /* Always show table in PDF */
-  .invoice-table {
-    display: block !important;
-  }
-
-  /* Never show mobile cards in PDF */
   .invoice-mobile {
     display: none !important;
+  }
+
+  .invoice-table {
+    display: block !important;
   }
 
   table {
     page-break-inside: avoid;
   }
 }
+

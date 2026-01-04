@@ -7,16 +7,7 @@ const Invoice = forwardRef(function Invoice(
   return (
     <div
       ref={ref}
-      className="
-        invoice-print
-        w-full
-        max-w-[794px]
-        mx-auto
-        bg-white
-        p-4 sm:p-6
-        text-sm
-        mt-10
-      "
+      className="invoice-print w-full max-w-[794px] mx-auto bg-white p-4 sm:p-6 text-sm mt-10"
     >
       <h3 className="text-center text-xl font-semibold mb-6">
         Tax Invoice
@@ -39,8 +30,8 @@ const Invoice = forwardRef(function Invoice(
         </div>
       </div>
 
-      {/* TABLE — always visible in PRINT */}
-      <div className="invoice-table mt-6">
+      {/* ================= TABLE (DESKTOP + PRINT ONLY) ================= */}
+      <div className="invoice-table hidden sm:block print:block mt-6">
         <table className="w-full border border-black border-collapse text-sm">
           <thead>
             <tr>
@@ -75,8 +66,8 @@ const Invoice = forwardRef(function Invoice(
         </table>
       </div>
 
-      {/* MOBILE VIEW — SCREEN ONLY */}
-      <div className="invoice-mobile mt-6 space-y-4">
+      {/* ================= MOBILE VIEW (SCREEN ONLY) ================= */}
+      <div className="invoice-mobile sm:hidden print:hidden mt-6 space-y-4">
         {items.map((it, i) => {
           const base = it.qty * it.price;
           const gstAmt = (base * it.gst) / 100;
@@ -86,13 +77,16 @@ const Invoice = forwardRef(function Invoice(
               <p className="font-semibold mb-2">
                 {i + 1}. {it.name}
               </p>
+
               <div className="grid grid-cols-2 gap-y-2">
                 <span>Qty</span><span className="text-right">{it.qty}</span>
                 <span>Price</span><span className="text-right">{fmt(it.price)}</span>
                 <span>Amount</span><span className="text-right">{fmt(base)}</span>
                 <span>GST</span><span className="text-right">{fmt(gstAmt)}</span>
                 <span className="font-semibold">Total</span>
-                <span className="text-right font-semibold">{fmt(base + gstAmt)}</span>
+                <span className="text-right font-semibold">
+                  {fmt(base + gstAmt)}
+                </span>
               </div>
             </div>
           );
