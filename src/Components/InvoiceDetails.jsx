@@ -47,7 +47,7 @@ export default function InvoiceDetails({ details, setDetails }) {
             />
           </div>
 
-          <div className="bg-blue-50 border-l-4 border-blue-500 rounded-md p-4 mt-2">
+          <div className="bg-white border-l-4 border-black rounded-md p-4 mt-2">
             <p className="text-sm sm:text-base text-gray-700">
               <strong className="text-gray-800">Invoice No:</strong>
               <span className="font-bold ml-2 text-blue-600 text-lg">

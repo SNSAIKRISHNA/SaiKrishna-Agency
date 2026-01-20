@@ -166,9 +166,22 @@ export default function App() {
     <div className="relative w-full min-h-screen flex flex-col">
       {/* Professional Gray Animated Background */}
       <div className="fixed inset-0 -z-10 bg-gradient-to-br from-gray-50 via-gray-100 to-slate-200">
+        {/* Animated blobs */}
         <div className="absolute top-20 left-10 w-96 h-96 bg-gray-200 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob-slow"></div>
         <div className="absolute top-40 right-10 w-96 h-96 bg-slate-300 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob-slow animation-delay-2000"></div>
         <div className="absolute -bottom-20 left-1/3 w-96 h-96 bg-gray-300 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob-slow animation-delay-4000"></div>
+        
+        {/* Logo Watermark */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <img 
+            src="/Logo.png" 
+            alt="Saikrishna Agency Logo" 
+            className="w-[600px] h-[600px] object-contain opacity-[0.05] select-none"
+            style={{ filter: 'grayscale(50%)' }}
+          />
+        </div>
+        
+        {/* Grid and noise patterns */}
         <div className="absolute inset-0 bg-grid-subtle opacity-[0.03]"></div>
         <div className="absolute inset-0 bg-noise opacity-[0.015]"></div>
       </div>

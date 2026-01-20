@@ -2,33 +2,41 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer
-      className="w-full mt-16 mb-0 border-t"
-      style={{ backgroundColor: "#ffffff", borderColor: "#e5e7eb" }}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+    <footer className="relative bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white border-t border-gray-700/50 overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute top-0 left-0 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl animate-pulse-slow"></div>
+      <div className="absolute bottom-0 right-0 w-32 h-32 bg-yellow-500/10 rounded-full blur-3xl animate-pulse-slow animation-delay-2000"></div>
+      
+      {/* Corner decorations */}
+      <div className="absolute top-3 left-3 w-8 h-8 border-t-2 border-l-2 border-yellow-400/50 rounded-tl-lg"></div>
+      <div className="absolute bottom-3 right-3 w-8 h-8 border-b-2 border-r-2 border-yellow-400/50 rounded-br-lg"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 relative z-10">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold" style={{ color: "#1f2937" }}>
-              Saikrishna Agency
+            <h3 className="text-xl font-bold font-['Playfair_Display',serif]">
+              <span className="bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-200 bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(251,191,36,0.3)]">
+                Saikrishna
+              </span>{" "}
+              <span className="text-gray-300 font-light font-['Montserrat',sans-serif]">
+                Agency
+              </span>
             </h3>
-            <p className="text-sm leading-relaxed" style={{ color: "#6b7280" }}>
+            <p className="text-sm leading-relaxed text-gray-400 font-['Montserrat',sans-serif]">
               Professional invoice management system for businesses. Create,
-            and download invoices with ease.
+              and download invoices with ease.
             </p>
             <div className="flex gap-4">
               {/* Social Media Icons */}
               <a
                 href="#"
-                className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
-                style={{ backgroundColor: "#f3f4f6" }}
+                className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 bg-gray-800/50 border border-gray-700/50 hover:border-yellow-400/50"
                 aria-label="Facebook"
               >
                 <svg
-                  className="w-5 h-5"
-                  style={{ color: "#3b82f6" }}
+                  className="w-5 h-5 text-yellow-400"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -37,13 +45,11 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
-                style={{ backgroundColor: "#f3f4f6" }}
+                className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 bg-gray-800/50 border border-gray-700/50 hover:border-yellow-400/50"
                 aria-label="Twitter"
               >
                 <svg
-                  className="w-5 h-5"
-                  style={{ color: "#1d9bf0" }}
+                  className="w-5 h-5 text-yellow-400"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -52,13 +58,11 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
-                style={{ backgroundColor: "#f3f4f6" }}
+                className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 bg-gray-800/50 border border-gray-700/50 hover:border-yellow-400/50"
                 aria-label="LinkedIn"
               >
                 <svg
-                  className="w-5 h-5"
-                  style={{ color: "#0a66c2" }}
+                  className="w-5 h-5 text-yellow-400"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -70,15 +74,14 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold" style={{ color: "#1f2937" }}>
+            <h4 className="text-lg font-semibold font-['Montserrat',sans-serif] text-yellow-400">
               Quick Links
             </h4>
             <ul className="space-y-2">
               <li>
                 <a
                   href="#"
-                  className="text-sm transition-colors duration-200 hover:underline"
-                  style={{ color: "#6b7280" }}
+                  className="text-sm transition-colors duration-200 hover:text-yellow-400 text-gray-400 font-['Montserrat',sans-serif]"
                 >
                   Home
                 </a>
@@ -86,8 +89,7 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className="text-sm transition-colors duration-200 hover:underline"
-                  style={{ color: "#6b7280" }}
+                  className="text-sm transition-colors duration-200 hover:text-yellow-400 text-gray-400 font-['Montserrat',sans-serif]"
                 >
                   Create Invoice
                 </a>
@@ -97,46 +99,41 @@ export default function Footer() {
 
           {/* Support */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold" style={{ color: "#1f2937" }}>
+            <h4 className="text-lg font-semibold font-['Montserrat',sans-serif] text-yellow-400">
               Support
             </h4>
             <ul className="space-y-2">
               <li>
                 <a
-                  className="text-sm transition-colors duration-200 hover:underline"
-                  style={{ color: "#6b7280" }}
+                  className="text-sm transition-colors duration-200 hover:text-yellow-400 text-gray-400 font-['Montserrat',sans-serif] cursor-pointer"
                 >
                   Help Center
                 </a>
               </li>
               <li>
                 <p
-                  className="text-sm transition-colors duration-200 hover:underline"
-                  style={{ color: "#6b7280" }}
+                  className="text-sm transition-colors duration-200 hover:text-yellow-400 text-gray-400 font-['Montserrat',sans-serif] cursor-pointer"
                 >
                   Contact Us
                 </p>
               </li>
               <li>
                 <p
-                  className="text-sm transition-colors duration-200 hover:underline"
-                  style={{ color: "#6b7280" }}
+                  className="text-sm transition-colors duration-200 hover:text-yellow-400 text-gray-400 font-['Montserrat',sans-serif] cursor-pointer"
                 >
                   FAQs
                 </p>
               </li>
               <li>
                 <p
-                  className="text-sm transition-colors duration-200 hover:underline"
-                  style={{ color: "#6b7280" }}
+                  className="text-sm transition-colors duration-200 hover:text-yellow-400 text-gray-400 font-['Montserrat',sans-serif] cursor-pointer"
                 >
                   Privacy Policy
                 </p>
               </li>
               <li>
                 <p
-                  className="text-sm transition-colors duration-200 hover:underline"
-                  style={{ color: "#6b7280" }}
+                  className="text-sm transition-colors duration-200 hover:text-yellow-400 text-gray-400 font-['Montserrat',sans-serif] cursor-pointer"
                 >
                   Terms of Service
                 </p>
@@ -146,14 +143,13 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold" style={{ color: "#1f2937" }}>
+            <h4 className="text-lg font-semibold font-['Montserrat',sans-serif] text-yellow-400">
               Contact
             </h4>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <svg
-                  className="w-5 h-5 mt-0.5 flex-shrink-0"
-                  style={{ color: "#2563eb" }}
+                  className="w-5 h-5 mt-0.5 flex-shrink-0 text-yellow-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -171,14 +167,13 @@ export default function Footer() {
                     d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                   />
                 </svg>
-                <span className="text-sm" style={{ color: "#6b7280" }}>
+                <span className="text-sm text-gray-400 font-['Montserrat',sans-serif]">
                   Tamil Nadu, India
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <svg
-                  className="w-5 h-5 mt-0.5 flex-shrink-0"
-                  style={{ color: "#2563eb" }}
+                  className="w-5 h-5 mt-0.5 flex-shrink-0 text-yellow-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -192,16 +187,14 @@ export default function Footer() {
                 </svg>
                 <a
                   href="tel:8489014499"
-                  className="text-sm transition-colors duration-200 hover:underline"
-                  style={{ color: "#6b7280" }}
+                  className="text-sm transition-colors duration-200 hover:text-yellow-400 text-gray-400 font-['Montserrat',sans-serif]"
                 >
                   +91 8489014499
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <svg
-                  className="w-5 h-5 mt-0.5 flex-shrink-0"
-                  style={{ color: "#2563eb" }}
+                  className="w-5 h-5 mt-0.5 flex-shrink-0 text-yellow-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -215,8 +208,7 @@ export default function Footer() {
                 </svg>
                 <a
                   href="mailto:info@saikrishnaagency.com"
-                  className="text-sm transition-colors duration-200 hover:underline"
-                  style={{ color: "#6b7280" }}
+                  className="text-sm transition-colors duration-200 hover:text-yellow-400 text-gray-400 font-['Montserrat',sans-serif]"
                 >
                   info@saikrishnaagency.com
                 </a>
@@ -225,34 +217,34 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Decorative divider */}
+        <div className="flex items-center justify-center gap-2 mb-6">
+          <div className="w-16 h-px bg-gradient-to-r from-transparent to-yellow-400/50"></div>
+          <div className="w-1.5 h-1.5 rounded-full bg-yellow-400/70"></div>
+          <div className="w-16 h-px bg-gradient-to-l from-transparent to-yellow-400/50"></div>
+        </div>
+
         {/* Bottom Bar */}
-        <div className="pt-6 border-t" style={{ borderColor: "#e5e7eb" }}>
+        <div className="pt-6 border-t border-gray-700/50">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <p
-              className="text-sm text-center sm:text-left"
-              style={{ color: "#6b7280" }}
+              className="text-sm text-center sm:text-left text-gray-400 font-['Montserrat',sans-serif]"
             >
               © {currentYear} Saikrishna Agency. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
               <p
-                
-                className="text-sm transition-colors duration-200 hover:underline"
-                style={{ color: "#6b7280" }}
+                className="text-sm transition-colors duration-200 hover:text-yellow-400 text-gray-400 font-['Montserrat',sans-serif] cursor-pointer"
               >
                 Privacy
               </p>
               <p
-                
-                className="text-sm transition-colors duration-200 hover:underline"
-                style={{ color: "#6b7280" }}
+                className="text-sm transition-colors duration-200 hover:text-yellow-400 text-gray-400 font-['Montserrat',sans-serif] cursor-pointer"
               >
                 Terms
               </p>
               <p
-               
-                className="text-sm transition-colors duration-200 hover:underline"
-                style={{ color: "#6b7280" }}
+                className="text-sm transition-colors duration-200 hover:text-yellow-400 text-gray-400 font-['Montserrat',sans-serif] cursor-pointer"
               >
                 Cookies
               </p>
