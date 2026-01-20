@@ -11,7 +11,6 @@ export default function InvoiceDetails({ details, setDetails }) {
         </h3>
 
         <div className="flex flex-col gap-5 sm:gap-6">
-          {/* Bill To Input */}
           <div className="group">
             <label className="block text-sm font-medium text-gray-600 mb-1">
               Bill To
@@ -24,7 +23,6 @@ export default function InvoiceDetails({ details, setDetails }) {
             />
           </div>
 
-          {/* Place of Supply Input */}
           <div className="group">
             <label className="block text-sm font-medium text-gray-600 mb-1">
               Place of Supply
@@ -37,7 +35,6 @@ export default function InvoiceDetails({ details, setDetails }) {
             />
           </div>
 
-          {/* Date Input */}
           <div className="group">
             <label className="block text-sm font-medium text-gray-600 mb-1">
               Invoice Date
@@ -50,7 +47,6 @@ export default function InvoiceDetails({ details, setDetails }) {
             />
           </div>
 
-          {/* Invoice Number Display */}
           <div className="bg-blue-50 border-l-4 border-blue-500 rounded-md p-4 mt-2">
             <p className="text-sm sm:text-base text-gray-700">
               <strong className="text-gray-800">Invoice No:</strong>

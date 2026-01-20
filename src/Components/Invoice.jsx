@@ -10,7 +10,7 @@ const Invoice = forwardRef(function Invoice(
       style={{ backgroundColor: "#ffffff" }}
       className="w-full max-w-[794px] mx-auto p-4 sm:p-8 text-sm print:p-6 mt-10 rounded-xl border-2"
     >
-      {/* Header */}
+
       <div
         className="text-center mb-8 pb-4 border-b-2"
         style={{ borderColor: "#d1d5db" }}
@@ -23,7 +23,6 @@ const Invoice = forwardRef(function Invoice(
         </h3>
       </div>
 
-      {/* Agency & Bill Details */}
       <div
         className="flex flex-col sm:flex-row justify-between gap-6 mb-8 p-5 rounded-lg border"
         style={{ backgroundColor: "#f9fafb", borderColor: "#e5e7eb" }}
@@ -49,16 +48,16 @@ const Invoice = forwardRef(function Invoice(
 
         <div
           className="flex-1 sm:text-right p-4 rounded-lg shadow-sm border-l-4"
-          style={{ backgroundColor: "#ffffff", borderLeftColor: "#2563eb" }}
+          style={{ backgroundColor: "#ffffff", borderLeftColor: "#050505" }}
         >
           <p className="mb-2">
             <strong style={{ color: "#1f2937" }}>Bill To:</strong>{" "}
-            <span style={{ color: "#374151" }}>{details.to}</span>
+            <span style={{ color: "#000000" }}>{details.to}</span>
           </p>
-          <p className="mb-2" style={{ color: "#374151" }}>
+          <p className="mb-2" style={{ color: "#000000" }}>
             <strong>Place:</strong> {details.place}
           </p>
-          <p className="mb-2" style={{ color: "#374151" }}>
+          <p className="mb-2" style={{ color: "#000000" }}>
             <strong>Date:</strong> {details.date}
           </p>
           <p
@@ -73,16 +72,15 @@ const Invoice = forwardRef(function Invoice(
         </div>
       </div>
 
-      {/* Desktop Table */}
       <div
         className="hidden md:block mt-6 overflow-hidden rounded-lg border shadow-sm"
         style={{ borderColor: "#d1d5db" }}
       >
         <table className="w-full border-collapse text-sm">
-          <thead style={{ backgroundColor: "#2563eb", color: "#ffffff" }}>
+          <thead style={{ backgroundColor: "#171717", color: "#ffffff" }}>
             <tr>
               {[
-                "#",
+                "Sno",
                 "Item",
                 "Qty",
                 "Price",
@@ -94,7 +92,7 @@ const Invoice = forwardRef(function Invoice(
                 <th
                   key={h}
                   className="border px-3 py-3 text-left font-semibold"
-                  style={{ borderColor: "#3b82f6" }}
+                  style={{ borderColor: "#ffffff" }}
                 >
                   {h}
                 </th>
@@ -146,7 +144,7 @@ const Invoice = forwardRef(function Invoice(
                   </td>
                   <td
                     className="border px-3 py-3 text-right font-semibold"
-                    style={{ borderColor: "#d1d5db", color: "#2563eb" }}
+                    style={{ borderColor: "#d1d5db", color: "#000000" }}
                   >
                     {it.gst}%
                   </td>
@@ -169,7 +167,6 @@ const Invoice = forwardRef(function Invoice(
         </table>
       </div>
 
-      {/* Tablet View (2-column cards) */}
       <div className="hidden sm:block md:hidden mt-6 space-y-4">
         {items.map((it, i) => {
           const base = it.qty * it.price;
@@ -232,7 +229,6 @@ const Invoice = forwardRef(function Invoice(
         })}
       </div>
 
-      {/* Mobile View */}
       <div className="sm:hidden mt-6 space-y-3">
         {items.map((it, i) => {
           const base = it.qty * it.price;
@@ -252,7 +248,7 @@ const Invoice = forwardRef(function Invoice(
 
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <span style={{ color: "#4b5563" }}>Quantity:</span>
+                  <span style={{ color: "#050505" }}>Quantity:</span>
                   <span className="font-semibold" style={{ color: "#1f2937" }}>
                     {it.qty}
                   </span>
@@ -295,19 +291,18 @@ const Invoice = forwardRef(function Invoice(
         })}
       </div>
 
-      {/* Totals Section */}
       <div
         className="mt-8 ml-auto w-full sm:w-80 p-5 rounded-lg border-2 shadow-lg"
         style={{ backgroundColor: "#f9fafb", borderColor: "#d1d5db" }}
       >
         <div className="space-y-3 text-sm sm:text-base">
-          <div className="flex justify-between" style={{ color: "#374151" }}>
+          <div className="flex justify-between" style={{ color: "#000000" }}>
             <span>Sub Total:</span>
             <span className="font-semibold">{fmt(subtotal())}</span>
           </div>
-          <div className="flex justify-between" style={{ color: "#374151" }}>
+          <div className="flex justify-between" style={{ color: "#000000" }}>
             <span>Total GST:</span>
-            <span className="font-semibold" style={{ color: "#2563eb" }}>
+            <span className="font-semibold" style={{ color: "#000000" }}>
               {fmt(totalGST())}
             </span>
           </div>
@@ -316,14 +311,13 @@ const Invoice = forwardRef(function Invoice(
             style={{ borderColor: "#9ca3af" }}
           >
             <span style={{ color: "#1f2937" }}>Grand Total:</span>
-            <span className="text-xl" style={{ color: "#16a34a" }}>
+            <span className="text-xl" style={{ color: "#000000" }}>
               {fmt(total())}
             </span>
           </div>
         </div>
       </div>
 
-      {/* Signature */}
       <div
         className="mt-16 text-right border-t-2 pt-6"
         style={{ borderColor: "#d1d5db" }}

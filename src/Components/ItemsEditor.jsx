@@ -31,7 +31,7 @@ export default function ItemsEditor({
           Items
         </h3>
 
-        {/* Table Header - Hidden on mobile */}
+
         <div className="hidden md:grid md:grid-cols-6 gap-3 mb-4 px-2 text-sm font-semibold text-gray-600">
           <div>Product</div>
           <div>Quantity</div>
@@ -41,7 +41,6 @@ export default function ItemsEditor({
           <div>Action</div>
         </div>
 
-        {/* Items List */}
         <div className="flex flex-col gap-4">
           {items.map((it, index) => {
             const total = it.qty * it.price * (1 + it.gst / 100);
@@ -52,7 +51,7 @@ export default function ItemsEditor({
                 className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-4 border border-gray-200 animate-fade-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                {/* Mobile Layout */}
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:hidden gap-3">
                   <div>
                     <label className="block text-xs font-medium text-gray-600 mb-1">
@@ -141,7 +140,7 @@ export default function ItemsEditor({
                   </div>
                 </div>
 
-                {/* Desktop/Tablet Layout */}
+
                 <div className="hidden md:grid md:grid-cols-6 gap-3 items-center">
                   <select
                     className="w-full border-2 border-gray-300 focus:border-blue-500 rounded-lg px-3 py-2 focus:outline-none transition-colors duration-300 bg-white"
@@ -203,7 +202,6 @@ export default function ItemsEditor({
           })}
         </div>
 
-        {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-3 mt-6">
           <button
             className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg px-6 py-3 hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02] font-semibold"
