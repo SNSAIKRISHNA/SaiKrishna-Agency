@@ -10,6 +10,7 @@ import Header from "./Components/Header";
 
 export default function App() {
   const invoiceRef = useRef(null);
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const [agency] = useState({
     name: "Saikrishna Agency",
@@ -21,12 +22,12 @@ export default function App() {
   const [details, setDetails] = useState({
     to: "",
     place: "",
-    date: "",
+    date: new Date().toISOString().split("T")[0],
     invoiceNo: "",
   });
 
   const [items, setItems] = useState([
-    { id: 1, name: "", qty: 1, price: 1, gst: 5 },
+    { id: 1, name: "", qty: 1, price: 0, gst: 5 },
   ]);
 
   function updateItem(id, field, value) {
@@ -73,59 +74,150 @@ export default function App() {
     return invoiceNo;
   }
 
-  
   async function downloadPDF() {
-    const newInvoiceNo = generateInvoiceNumber();
+    // Validation
+    if (!details.to || !details.place || !details.date) {
+      alert("Please fill in all invoice details (Bill To, Place, Date)");
+      return;
+    }
 
-    setDetails((prev) => ({
-      ...prev,
-      invoiceNo: newInvoiceNo,
-    }));
+    if (items.length === 0 || items.every((item) => !item.name)) {
+      alert("Please add at least one item to the invoice");
+      return;
+    }
 
-    
-    setTimeout(async () => {
-      const canvas = await html2canvas(invoiceRef.current, { scale: 2 });
+    setIsGenerating(true);
+
+    try {
+      // Generate new invoice number
+      const newInvoiceNo = generateInvoiceNumber();
+
+      // Update invoice number in state
+      setDetails((prev) => ({
+        ...prev,
+        invoiceNo: newInvoiceNo,
+      }));
+
+      // Wait for React to update the DOM completely
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      // Check if element exists
+      if (!invoiceRef.current) {
+        throw new Error("Invoice element not found");
+      }
+
+      console.log("Starting PDF generation...");
+
+      // Capture the invoice with better options
+      const canvas = await html2canvas(invoiceRef.current, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: false,
+        backgroundColor: "#ffffff",
+        logging: false,
+        windowWidth: 794,
+        windowHeight: invoiceRef.current.scrollHeight,
+      });
+
+      console.log("Canvas captured successfully");
+
+      // Convert canvas to image
       const imgData = canvas.toDataURL("image/png");
 
-      const pdf = new jsPDF("p", "pt", "a4");
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      if (!imgData || imgData === "data:,") {
+        throw new Error("Failed to create image from invoice");
+      }
 
-      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-      pdf.save(`${newInvoiceNo}.pdf`);
-    }, 300);
+      console.log("Image data created");
+
+      // Create PDF
+      const pdf = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: "a4",
+      });
+
+      // A4 dimensions in mm
+      const pageWidth = 210;
+      const pageHeight = 297;
+
+      // Calculate image dimensions to fit A4
+      const imgWidth = pageWidth;
+      const imgHeight = (canvas.height * pageWidth) / canvas.width;
+
+      let heightLeft = imgHeight;
+      let position = 0;
+
+      // Add image to first page
+      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+
+      // Add more pages if needed
+      while (heightLeft > 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+
+      console.log("PDF created successfully");
+
+      // Save PDF
+      pdf.save(`Invoice-${newInvoiceNo}.pdf`);
+
+      alert(`✅ Invoice ${newInvoiceNo} downloaded successfully!`);
+    } catch (error) {
+      console.error("Detailed PDF generation error:", error);
+      alert(`❌ Failed to generate PDF: ${error.message}`);
+    } finally {
+      setIsGenerating(false);
+    }
   }
 
   return (
-   
-   <div className="w-full px-3">
-    <Header  />
-    
-    
+    <div className="relative w-full min-h-screen overflow-hidden">
+      {/* Professional Gray Animated Background */}
+      <div className="fixed inset-0 -z-10 bg-gradient-to-br from-gray-50 via-gray-100 to-slate-200">
+        {/* Subtle animated circles */}
+        <div className="absolute top-20 left-10 w-96 h-96 bg-gray-200 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob-slow"></div>
+        <div className="absolute top-40 right-10 w-96 h-96 bg-slate-300 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob-slow animation-delay-2000"></div>
+        <div className="absolute -bottom-20 left-1/3 w-96 h-96 bg-gray-300 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob-slow animation-delay-4000"></div>
+        
+        {/* Subtle grid pattern */}
+        <div className="absolute inset-0 bg-grid-subtle opacity-[0.03]"></div>
+        
+        {/* Noise texture overlay for depth */}
+        <div className="absolute inset-0 bg-noise opacity-[0.015]"></div>
+      </div>
 
-    <div className="w-full mx-auto px-6  bg-white text-black">
-      <InvoiceDetails details={details} setDetails={setDetails} />
+      {/* Content */}
+      <div className="relative w-full px-3">
+        <Header />
 
-      <ItemsEditor
-        items={items}
-        updateItem={updateItem}
-        addItem={addItem}
-        removeItem={removeItem}
-        downloadPDF={downloadPDF}
-      />
+        <div className="w-full mx-auto px-3 sm:px-6 pb-10 animate-fade-in-up">
+          <InvoiceDetails details={details} setDetails={setDetails} />
 
-      <Invoice
-        ref={invoiceRef}
-        agency={agency}
-        details={details}
-        items={items}
-        subtotal={subtotal}
-        totalGST={totalGST}
-        total={total}
-        fmt={fmt}
-      />
+          <ItemsEditor
+            items={items}
+            updateItem={updateItem}
+            addItem={addItem}
+            removeItem={removeItem}
+            downloadPDF={downloadPDF}
+            isGenerating={isGenerating}
+          />
+
+          <Invoice
+            ref={invoiceRef}
+            agency={agency}
+            details={details}
+            items={items}
+            subtotal={subtotal}
+            totalGST={totalGST}
+            total={total}
+            fmt={fmt}
+          />
+        </div>
+      </div>
     </div>
-   
-  </div>
-);
+  );
 }
